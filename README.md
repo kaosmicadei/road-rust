@@ -1,2 +1,2 @@
 # road-rust
-Small projects in Rust
+Some small projects in Rust
