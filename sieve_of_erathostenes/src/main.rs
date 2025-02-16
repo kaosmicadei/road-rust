@@ -1,7 +1,7 @@
 use std::time::Instant;
 
 fn sieve_original(limit: usize) -> Vec<bool> {
-  let mut sieve = vec![true; limit / 2];
+  let mut sieve = vec![true; limit / 2]; // Only store odd numbers
   sieve[0] = false;
   let cross_limit = (limit as f64).sqrt() as usize;
 
@@ -24,7 +24,7 @@ fn sieve_original(limit: usize) -> Vec<bool> {
   This version runs considerable fast than the original.
 */
 fn sieve_optimized(limit: usize) -> Vec<bool> {
-  let mut sieve = vec![true; limit / 2];
+  let mut sieve = vec![true; limit / 2]; // Only store odd numbers
   sieve[0] = false;
   let cross_limit = (limit as f64).sqrt() as usize;
 
