@@ -10,13 +10,13 @@ fn add_simd(a: &[f32], b: &[f32], out: &mut [f32]) {
   const LANES: usize = f32x4::LEN;
   
   let (a_chunks, a_reminder) = a.as_chunks::<4>();
-  let (b_chunks, b_reminder) = a.as_chunks::<4>();
+  let (b_chunks, b_reminder) = b.as_chunks::<4>();
   
   a_chunks.iter()
   .zip(b_chunks.iter())
   .map(|(xs, ys)| {
-    let vx = f32x4::from_slice(xs);
-    let vy = f32x4::from_slice(ys);
+    let vx = f32x4::from_array(*xs);
+    let vy = f32x4::from_array(*ys);
     vx + vy
   })
   .enumerate()
@@ -25,7 +25,7 @@ fn add_simd(a: &[f32], b: &[f32], out: &mut [f32]) {
     res.copy_to_slice(&mut out[j..j+LANES]);
   });
   
-  let simd_len: usize = a.len() / LANES * LANES;
+  let simd_len: usize = a_chunks.len() * LANES;
   
   a_reminder.iter()
     .zip(b_reminder.iter())
@@ -44,7 +44,7 @@ fn main() {
   let c = a + b;
   println!("{:?}", c);
   
-  let a: [f32; 18] = core::array::from_fn(|i| i as f32);
+  let a: [f32; 18] = core::array::from_fn(|i| (2 * i) as f32);
   let b: [f32; 18] = core::array::from_fn(|i| i as f32);
   let mut d = [0.0; 18];
   add_simd(&a, &b, &mut d);
