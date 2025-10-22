@@ -14,9 +14,9 @@ fn add_simd(a: &[f32], b: &[f32], out: &mut [f32]) {
   
   a_chunks.iter()
   .zip(b_chunks.iter())
-  .map(|(xs, ys)| {
-    let vx = f32x4::from_array(*xs);
-    let vy = f32x4::from_array(*ys);
+  .map(|(&xs, &ys)| {
+    let vx = f32x4::from_array(xs);
+    let vy = f32x4::from_array(ys);
     vx + vy
   })
   .enumerate()
