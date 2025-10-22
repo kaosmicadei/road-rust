@@ -1,0 +1,7 @@
+[package]
+name = "call_python_from_rust"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+pyo3 = { version = "0.22", features = ["auto-initialize"] }
